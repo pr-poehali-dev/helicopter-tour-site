@@ -9,6 +9,7 @@ import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const tours = [
     {
@@ -81,13 +82,56 @@ const Index = () => {
                 </button>
               ))}
             </div>
-            <Button className="bg-accent hover:bg-accent/90 text-white">
-              <Icon name="Phone" size={18} className="mr-2" />
+            <div className="flex items-center gap-4">
+              <Button className="hidden md:flex bg-accent hover:bg-accent/90 text-white">
+                <Icon name="Phone" size={18} className="mr-2" />
+                Связаться
+              </Button>
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden text-white p-2"
+                aria-label="Toggle menu"
+              >
+                <Icon name={mobileMenuOpen ? "X" : "Menu"} size={28} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-primary/98 backdrop-blur-md md:hidden animate-fade-in">
+          <div className="flex flex-col items-center justify-center h-full gap-8 px-6">
+            {['home', 'tours', 'gallery', 'about', 'booking', 'contacts'].map((section, idx) => (
+              <button
+                key={section}
+                onClick={() => {
+                  scrollToSection(section);
+                  setMobileMenuOpen(false);
+                }}
+                className={`text-2xl font-medium transition-colors hover:text-accent animate-fade-in ${
+                  activeSection === section ? 'text-accent' : 'text-white'
+                }`}
+                style={{ animationDelay: `${idx * 0.1}s` }}
+              >
+                {section === 'home' && 'Главная'}
+                {section === 'tours' && 'Туры'}
+                {section === 'gallery' && 'Галерея'}
+                {section === 'about' && 'О компании'}
+                {section === 'booking' && 'Бронирование'}
+                {section === 'contacts' && 'Контакты'}
+              </button>
+            ))}
+            <Button 
+              className="bg-accent hover:bg-accent/90 text-white text-lg px-8 mt-8"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <Icon name="Phone" size={20} className="mr-2" />
               Связаться
             </Button>
           </div>
         </div>
-      </nav>
+      )}
 
       <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
         <div 
