@@ -6,7 +6,7 @@ import Icon from '@/components/ui/icon';
 const tours = [
   {
     id: 'mountain',
-    title: 'Панорама гор',
+    title: 'Долина-гейзеров',
     description: 'Частный тур над величественными горными вершинами с персональным пилотом',
     duration: '2 часа',
     price: 'от 150 000 ₽',
