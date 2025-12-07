@@ -122,7 +122,7 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Icon name="Plane" className="text-accent" size={32} />
-              <span className="text-2xl font-bold text-white">SkyLux</span>
+              <span className="text-2xl font-bold text-white"></span>
             </div>
             <div className="hidden md:flex items-center gap-8">
               {['home', 'tours', 'gallery', 'about', 'booking', 'contacts'].map((section) => (
