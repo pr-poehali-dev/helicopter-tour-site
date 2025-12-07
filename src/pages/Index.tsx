@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -9,6 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
+  const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [welcomeModalOpen, setWelcomeModalOpen] = useState(false);
@@ -27,6 +29,7 @@ const Index = () => {
 
   const tours = [
     {
+      id: 'mountain',
       title: 'Панорама гор',
       description: 'Частный тур над величественными горными вершинами с персональным пилотом',
       duration: '2 часа',
@@ -35,6 +38,7 @@ const Index = () => {
       image: 'https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?w=800&q=80'
     },
     {
+      id: 'coast',
       title: 'Прибрежная элегантность',
       description: 'Эксклюзивный полёт вдоль побережья с посадкой на частном пляже',
       duration: '3 часа',
@@ -43,6 +47,7 @@ const Index = () => {
       image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80'
     },
     {
+      id: 'night',
       title: 'Ночной город',
       description: 'Романтический полёт над городом в вечерних огнях',
       duration: '1.5 часа',
@@ -266,9 +271,21 @@ const Index = () => {
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full bg-primary hover:bg-primary/90" onClick={() => scrollToSection('booking')}>
-                    Забронировать тур
-                  </Button>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button 
+                      variant="outline" 
+                      className="w-full"
+                      onClick={() => navigate(`/tour/${tour.id}`)}
+                    >
+                      Подробнее
+                    </Button>
+                    <Button 
+                      className="w-full bg-primary hover:bg-primary/90" 
+                      onClick={() => scrollToSection('booking')}
+                    >
+                      Забронировать
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             ))}
