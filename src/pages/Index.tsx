@@ -71,37 +71,46 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Dialog open={welcomeModalOpen} onOpenChange={setWelcomeModalOpen}>
-        <DialogContent className="max-w-4xl p-0 overflow-hidden">
-          <DialogHeader className="p-6 pb-0">
-            <DialogTitle className="text-3xl font-bold text-center">Добро пожаловать в SkyLux</DialogTitle>
-          </DialogHeader>
-          <div className="relative w-full aspect-video bg-black">
-            <iframe
-              width="100%"
-              height="100%"
-              src="https://www.youtube.com/embed/jNQXAC9IVRw?autoplay=1&mute=1"
-              title="SkyLux Welcome Video"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-full"
-            />
-          </div>
-          <div className="p-6 text-center">
-            <p className="text-lg text-muted-foreground mb-4">
-              Откройте для себя мир премиальных вертолётных туров
-            </p>
-            <Button 
+      {welcomeModalOpen && (
+        <div className="fixed bottom-6 right-6 z-50 animate-fade-in">
+          <Card className="w-80 shadow-2xl border-2 border-accent/30">
+            <button
               onClick={closeWelcomeModal}
-              className="bg-accent hover:bg-accent/90 text-white px-8"
+              className="absolute -top-2 -right-2 bg-accent text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-accent/90 transition-colors shadow-lg z-10"
+              aria-label="Close"
             >
-              Начать путешествие
-              <Icon name="ArrowRight" size={20} className="ml-2" />
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+              <Icon name="X" size={18} />
+            </button>
+            <CardContent className="p-0">
+              <div className="relative w-full aspect-video bg-black rounded-t-lg overflow-hidden">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/jNQXAC9IVRw?autoplay=1&mute=1"
+                  title="SkyLux Welcome Video"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              </div>
+              <div className="p-4 text-center">
+                <p className="text-sm font-semibold mb-2">
+                  Премиальные вертолётные туры
+                </p>
+                <Button 
+                  onClick={closeWelcomeModal}
+                  size="sm"
+                  className="bg-accent hover:bg-accent/90 text-white w-full"
+                >
+                  Смотреть туры
+                  <Icon name="ArrowRight" size={16} className="ml-2" />
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
 
       <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-accent/20">
         <div className="container mx-auto px-6 py-4">
