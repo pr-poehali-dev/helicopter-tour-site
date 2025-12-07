@@ -1,15 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [welcomeModalOpen, setWelcomeModalOpen] = useState(false);
+
+  useEffect(() => {
+    const hasSeenWelcome = localStorage.getItem('hasSeenWelcome');
+    if (!hasSeenWelcome) {
+      setTimeout(() => setWelcomeModalOpen(true), 1000);
+    }
+  }, []);
+
+  const closeWelcomeModal = () => {
+    setWelcomeModalOpen(false);
+    localStorage.setItem('hasSeenWelcome', 'true');
+  };
 
   const tours = [
     {
@@ -57,6 +71,38 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Dialog open={welcomeModalOpen} onOpenChange={setWelcomeModalOpen}>
+        <DialogContent className="max-w-4xl p-0 overflow-hidden">
+          <DialogHeader className="p-6 pb-0">
+            <DialogTitle className="text-3xl font-bold text-center">Добро пожаловать в SkyLux</DialogTitle>
+          </DialogHeader>
+          <div className="relative w-full aspect-video bg-black">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/jNQXAC9IVRw?autoplay=1&mute=1"
+              title="SkyLux Welcome Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            />
+          </div>
+          <div className="p-6 text-center">
+            <p className="text-lg text-muted-foreground mb-4">
+              Откройте для себя мир премиальных вертолётных туров
+            </p>
+            <Button 
+              onClick={closeWelcomeModal}
+              className="bg-accent hover:bg-accent/90 text-white px-8"
+            >
+              Начать путешествие
+              <Icon name="ArrowRight" size={20} className="ml-2" />
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-accent/20">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
