@@ -194,13 +194,6 @@ const Index = () => {
       )}
 
       <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ 
-            backgroundImage: 'url(https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?w=1920&q=80)',
-            filter: 'brightness(0.4)'
-          }}
-        />
         <div className="relative z-10 text-center text-white px-6 animate-fade-in-up">
           <h1 className="text-6xl md:text-7xl font-bold mb-6 tracking-tight">
             Вертолётные туры<br />премиум-класса
