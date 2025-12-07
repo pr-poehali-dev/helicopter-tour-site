@@ -16,15 +16,11 @@ const Index = () => {
   const [welcomeModalOpen, setWelcomeModalOpen] = useState(false);
 
   useEffect(() => {
-    const hasSeenWelcome = localStorage.getItem('hasSeenWelcome');
-    if (!hasSeenWelcome) {
-      setTimeout(() => setWelcomeModalOpen(true), 1000);
-    }
+    setTimeout(() => setWelcomeModalOpen(true), 1000);
   }, []);
 
   const closeWelcomeModal = () => {
     setWelcomeModalOpen(false);
-    localStorage.setItem('hasSeenWelcome', 'true');
   };
 
   const tours = [
